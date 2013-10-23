@@ -1,0 +1,162 @@
+HOST: http://api.campfiremanager.info/v3/
+
+--- CampFireManager ---
+
+---
+This is the API documentation for the next generation of CampFireManager back-ends. 
+
+For more details about CampFireManager, take a look at http://campfiremanager.info
+---
+
+--
+Event Resources
+These resources are used to populate everything relating to the event
+--
+
+Explain the "Top Level" details about the event.
+GET /event
+> Content-Type: application/json
+< 200
+< Content-Type: application/json
+{"startdate": "2013-10-19","enddate":"2013-10-20","name": "OggCamp '13","latitude":  53.405851,"longditude": -2.970503,"address": "LJMU Art & Design Academy, Duckinfield Street, Liverpool, L3 5RB","summary": "OggCamp is an unconference focusing on Free Culture, Free Software and Creative Commons.","lastUpdate":2013-10-18 00:00:00}
+
+Get the Room details
+GET /room
+> Content-Type: application/json
+< 200
+< Content-Type: application/json
+{
+    [{"intRoomID": 1,"strRoomName": "Main Stage","intRoomSize": 400,"isLocked": TRUE,"lastUpdate":2013-10-18 00:00:00}],
+    [{"intRoomID": 2,"strRoomName": "Room 2","intRoomSize": 70,"isLocked": FALSE,"lastUpdate":2013-10-18 00:00:00}],
+    [{"intRoomID": 3,"strRoomName": "Room 3","intRoomSize": 40,"isLocked": FALSE,"lastUpdate":2013-10-18 00:00:00}],
+    [{"intRoomID": 4,"strRoomName": "Room 4","intRoomSize": 40,"isLocked": FALSE,"lastUpdate":2013-10-18 00:00:00}]
+}
+
+Get the Slot details
+GET /slot
+> Content-Type: application/json
+< 200
+< Content-Type: application/json
+{
+    [{"intSlotID": 1,"startDate": "2013-10-19","startTime": "10:45:00","endDate": "2013-10-19","endTime": "11:00:00","defaultState": ["title": "Welcome Speech", "isLocked": "hard"],"lastUpdate":2013-10-18 00:00:00}], 
+    [{"intSlotID": 2,"startDate": "2013-10-19","startTime": "11:00:00","endDate": "2013-10-19","endTime": "11:55:00","defaultState": [],"lastUpdate":2013-10-18 00:00:00}], 
+    [{"intSlotID": 3,"startDate": "2013-10-19","startTime": "12:00:00","endDate": "2013-10-19","endTime": "12:55:00","defaultState": [],"lastUpdate":2013-10-18 00:00:00}],
+    [{"intSlotID": 4,"startDate": "2013-10-19","startTime": "13:00:00","endDate": "2013-10-19","endTime": "13:55:00","defaultState": ["title": "Lunch/Geeknic", "isLocked": "soft"],"lastUpdate":2013-10-18 00:00:00}],
+    [{"intSlotID": 5,"startDate": "2013-10-19","startTime": "14:00:00","endDate": "2013-10-19","endTime": "14:55:00","defaultState": [],"lastUpdate":2013-10-18 00:00:00}],
+    [{"intSlotID": 6,"startDate": "2013-10-19","startTime": "15:00:00","endDate": "2013-10-19","endTime": "15:55:00","defaultState": [],"lastUpdate":2013-10-18 00:00:00}],
+    [{"intSlotID": 7,"startDate": "2013-10-19","startTime": "16:00:00","endDate": "2013-10-19","endTime": "16:55:00","defaultState": ["title": "Live Show", "isLocked": "hard"],"lastUpdate":2013-10-18 00:00:00}],
+    [{"intSlotID": 8,"startDate": "2013-10-20","startTime": "10:45:00","endDate": "2013-10-19","endTime": "11:00:00","defaultState": ["title": "Welcome Back", "isLocked": "hard"],"lastUpdate":2013-10-18 00:00:00}], 
+    [{"intSlotID": 9,"startDate": "2013-10-20","startTime": "11:00:00","endDate": "2013-10-19","endTime": "11:55:00","defaultState": [],"lastUpdate":2013-10-18 00:00:00}], 
+    [{"intSlotID": 10,"startDate": "2013-10-20","startTime": "12:00:00","endDate": "2013-10-19","endTime": "12:55:00","defaultState": [],"lastUpdate":2013-10-18 00:00:00}],
+    [{"intSlotID": 11,"startDate": "2013-10-20","startTime": "13:00:00","endDate": "2013-10-19","endTime": "13:55:00","defaultState": ["title": "Lunch/Geeknic", "isLocked": "soft"],"lastUpdate":2013-10-18 00:00:00}],
+    [{"intSlotID": 12,"startDate": "2013-10-20","startTime": "14:00:00","endDate": "2013-10-19","endTime": "14:55:00","defaultState": [],"lastUpdate":2013-10-18 00:00:00}],
+    [{"intSlotID": 13,"startDate": "2013-10-20","startTime": "15:00:00","endDate": "2013-10-19","endTime": "15:55:00","defaultState": [],"lastUpdate":2013-10-18 00:00:00}],
+    [{"intSlotID": 14,"startDate": "2013-10-20","startTime": "16:00:00","endDate": "2013-10-19","endTime": "16:55:00","defaultState": ["title": "RaffleCast", "isLocked": "hard"],"lastUpdate":2013-10-18 00:00:00}],
+}
+
+--
+People
+These requests return details on attending users
+--
+
+Get all users
+GET /user
+> Content-Type: application/json
+< 200
+< Content-Type: application/json
+{
+    [{
+        "intUserID": 1,
+        "strUserName": "John Doe",
+        "arrLinks": {"Twitter": "http://twitter.com/example", "Blog": "http://example.com"},
+        "isSpeaker": true,
+        "isSupport": false,
+        "isAdmin": false
+    }],
+    [{
+        "intUserID": 2,
+        "strUserName": "Mr CFM Admin",
+        "arrLinks": {"project": "http://campfiremanager.info"},
+        "isSpeaker": false,
+        "isSupport": true,
+        "isAdmin": true
+    }],
+    [{
+        "intUserID": 3,
+        "strUserName": "Anonymous",
+        "arrLinks": {},
+        "isSpeaker": false,
+        "isSupport": false,
+        "isAdmin": false
+    }]
+}
+
+Get an individual user
+GET /user/{id}
+> Content-Type: application/json
+< 200
+< Content-Type: application/json
+[{
+    "intUserID": 1,
+    "strUserName": "John Doe",
+    "arrLinks": {"Twitter": "http://twitter.com/example", "Blog": "http://example.com"},
+    "isSpeaker": true,
+    "isSupport": false,
+    "isAdmin": false
+}]
+
+Get only non-anonymous users
+GET /user?anon=false
+> Content-Type: application/json
+< 200
+< Content-Type: application/json
+{
+    [{
+        "intUserID": 1,
+        "strUserName": "John Doe",
+        "arrLinks": {"Twitter": "http://twitter.com/example", "Blog": "http://example.com"},
+        "isSpeaker": true,
+        "isSupport": false,
+        "isAdmin": false
+    }],
+    [{
+        "intUserID": 2,
+        "strUserName": "Mr CFM Admin",
+        "arrLinks": {"project": "http://campfiremanager.info"},
+        "isSpeaker": false,
+        "isSupport": true,
+        "isAdmin": true
+    }]
+}
+
+Update a user record
+POST /user/{id}
+> Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+> Content-Type: application/json
+{"strUserName":"John Q. Doe"}
+< 200
+< Content-Type: application/json
+[{
+    "intUserID": 1,
+    "strUserName": "John Q. Doe",
+    "arrLinks": {"Twitter": "http://twitter.com/example", "Blog": "http://example.com"},
+    "isSpeaker": true,
+    "isSupport": false,
+    "isAdmin": false
+}]
+
+Get the authenticated user
+GET /user/me
+> Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+> Content-Type: application/json
+< 200
+< Content-Type: application/json
+[{
+    "intUserID": 1,
+    "strUserName": "John Doe",
+    "arrLinks": {"Twitter": "http://twitter.com/example", "Blog": "http://example.com"},
+    "isSpeaker": true,
+    "isSupport": false,
+    "isAdmin": false
+}]
+
