@@ -18,7 +18,17 @@ GET /event
 > Content-Type: application/json
 < 200
 < Content-Type: application/json
-{"startdate": "2013-10-19","enddate":"2013-10-20","name": "OggCamp '13","latitude":  53.405851,"longditude": -2.970503,"address": "LJMU Art & Design Academy, Duckinfield Street, Liverpool, L3 5RB","summary": "OggCamp is an unconference focusing on Free Culture, Free Software and Creative Commons.","lastUpdate":2013-10-18 00:00:00}
+{
+    "startdate": "2013-10-19",
+    "enddate":"2013-10-20",
+    "name": "OggCamp '13",
+    "latitude":  53.405851,
+    "longditude": -2.970503,
+    "address": "LJMU Art & Design Academy, Duckinfield Street, Liverpool, L3 5RB",
+    "summary": "OggCamp is an unconference focusing on Free Culture, Free Software and Creative Commons.",
+    "lastUpdate":2013-10-18 00:00:00,
+    "links": ["public": "http://example.campfiremanager.info", "joind.in": "http://joind.in/event/view/", "lanyrd": "http://lanyrd.com/2013/oggcamp/"]
+}
 
 Get the Room details
 GET /room
@@ -145,7 +155,7 @@ POST /user/{id}
     "isAdmin": false
 }]
 
-Get the authenticated user
+Get the currently authenticated user
 GET /user/me
 > Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 > Content-Type: application/json
@@ -160,3 +170,95 @@ GET /user/me
     "isAdmin": false
 }]
 
+--
+Talks
+A conference is run for it's talks, and here we define how those talks should appear
+--
+
+List all talks
+GET /talk
+> Content-Type: application/json
+< 200
+< Content-Type: application/json
+{
+    [
+        "intTalkID": 1,
+        "strTalkTitle": "Welcome talk",
+        "strTalkDescription": "An introduction to the event",
+        "intSlotID": 1,
+        "intRoomID": 1,
+        "intProposer": 1,
+        "arrPresenters": [1,2,3],
+        "arrLinks": ["Slides": "http://example.com", "joind.in": "https://joind.in/talk/view/1"],
+        "arrNamedAttendees": [4,5,6,7,8,9,10],
+        "intAnonymousAttendees": 14
+    ],
+    [
+        "intTalkID": 2,
+        "strTalkTitle": "Welcome back",
+        "strTalkDescription": "An introduction to day two",
+        "intSlotID": 8,
+        "intRoomID": 1,
+        "intProposer": 1,
+        "arrPresenters": [1,2,3],
+        "arrLinks": ["joind.in": "https://joind.in/talk/view/2"],
+        "arrNamedAttendees": [4,5,6,7,8,9,10],
+        "intAnonymousAttendees": 9
+    ],
+    [
+        "intTalkID": 3,
+        "strTalkTitle": "Live Show",
+        "strTalkDescription": "The usual live show!",
+        "intSlotID": 7,
+        "intRoomID": 1,
+        "intProposer": 2,
+        "arrPresenters": [2,3,4],
+        "arrLinks": ["joind.in": "https://joind.in/talk/view/3"],
+        "arrNamedAttendees": [1,5,6,7,8,9,10],
+        "intAnonymousAttendees": 50
+    ]
+}
+
+List a specific talks
+GET /talk/{id}
+> Content-Type: application/json
+< 200
+< Content-Type: application/json
+[
+    "intTalkID": 1,
+    "strTalkTitle": "Welcome talk",
+    "strTalkDescription": "An introduction to the event",
+    "intSlotID": 1,
+    "intRoomID": 1,
+    "intProposer": 1,
+    "arrPresenters": [1,2,3],
+    "arrLinks": ["Slides": "http://example.com", "joind.in": "https://joind.in/talk/view/1"],
+    "arrNamedAttendees": [4,5,6,7,8,9,10],
+    "intAnonymousAttendees": 14
+]
+
+Create a talk
+POST /talk
+> Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+> Content-Type: application/json
+{"strTalkTitle": "Welcome talk", "strTalkDescription": "An introduction to the event", "intSlotID": 1}
+< 200
+< Content-Type: application/json
+[
+    "intTalkID": 1,
+    "strTalkTitle": "Welcome talk",
+    "strTalkDescription": "An introduction to the event",
+    "intSlotID": 1,
+    "intRoomID": -1,
+    "intProposer": 1,
+    "arrPresenters": [],
+    "arrLinks": [],
+    "arrNamedAttendees": [],
+    "intAnonymousAttendees": 0
+]
+
+
+--
+Attendees
+The attendee is the lifeblood of CampFireManager
+--
