@@ -139,6 +139,21 @@ GET /user?anon=false
     }]
 }
 
+Get the currently authenticated user
+GET /user/me
+> Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+> Content-Type: application/json
+< 200
+< Content-Type: application/json
+[{
+    "intUserID": 1,
+    "strUserName": "John Doe",
+    "arrLinks": {"Twitter": "http://twitter.com/example", "Blog": "http://example.com"},
+    "isSpeaker": true,
+    "isSupport": false,
+    "isAdmin": false
+}]
+
 Update a user record
 POST /user/{id}
 > Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
@@ -155,16 +170,17 @@ POST /user/{id}
     "isAdmin": false
 }]
 
-Get the currently authenticated user
-GET /user/me
+Add a link into a user record
+POST /user/{id}/links
 > Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 > Content-Type: application/json
+{"Facebook": "https://facebook.com/example"}
 < 200
 < Content-Type: application/json
 [{
     "intUserID": 1,
-    "strUserName": "John Doe",
-    "arrLinks": {"Twitter": "http://twitter.com/example", "Blog": "http://example.com"},
+    "strUserName": "John Q. Doe",
+    "arrLinks": {"Twitter": "http://twitter.com/example", "Blog": "http://example.com", "Facebook": "https://facebook.com/example"},
     "isSpeaker": true,
     "isSupport": false,
     "isAdmin": false
@@ -238,6 +254,10 @@ GET /talk/{id}
 ]
 
 Create a talk
+
+While you can specify the other fields mentioned in the response (like intRoomID), some of these will be reset by processes on the server.
+
+The fields suffixed "_ro" are server generated.
 POST /talk
 > Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
 > Content-Type: application/json
@@ -253,10 +273,9 @@ POST /talk
     "intProposer": 1,
     "arrPresenters": [],
     "arrLinks": [],
-    "arrNamedAttendees": [],
-    "intAnonymousAttendees": 0
+    "arrNamedAttendees_ro": [],
+    "intAnonymousAttendees_ro": 0
 ]
-
 
 --
 Attendees
