@@ -15,7 +15,7 @@ These resources are used to populate everything relating to the event
 
 Explain the "Top Level" details about the event.
 GET /event
-> Content-Type: application/json
+> Accept: application/json
 < 200
 < Content-Type: application/json
 {
@@ -32,7 +32,7 @@ GET /event
 
 Get the Room details
 GET /room
-> Content-Type: application/json
+> Accept: application/json
 < 200
 < Content-Type: application/json
 {
@@ -44,7 +44,7 @@ GET /room
 
 Get the Slot details
 GET /slot
-> Content-Type: application/json
+> Accept: application/json
 < 200
 < Content-Type: application/json
 {
@@ -71,7 +71,7 @@ These requests return details on attending users
 
 Get all users
 GET /user
-> Content-Type: application/json
+> Accept: application/json
 < 200
 < Content-Type: application/json
 {
@@ -103,7 +103,7 @@ GET /user
 
 Get an individual user
 GET /user/{id}
-> Content-Type: application/json
+> Accept: application/json
 < 200
 < Content-Type: application/json
 [{
@@ -117,7 +117,7 @@ GET /user/{id}
 
 Get only non-anonymous users
 GET /user?anon=false
-> Content-Type: application/json
+> Accept: application/json
 < 200
 < Content-Type: application/json
 {
@@ -142,7 +142,7 @@ GET /user?anon=false
 Get the currently authenticated user
 GET /user/me
 > Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
-> Content-Type: application/json
+> Accept: application/json
 < 200
 < Content-Type: application/json
 [{
@@ -157,6 +157,7 @@ GET /user/me
 Update a user record
 POST /user/{id}
 > Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+> Accept: application/json
 > Content-Type: application/json
 {"strUserName":"John Q. Doe"}
 < 200
@@ -173,6 +174,7 @@ POST /user/{id}
 Add a link into a user record
 POST /user/{id}/links
 > Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+> Accept: application/json
 > Content-Type: application/json
 {"Facebook": "https://facebook.com/example"}
 < 200
@@ -193,7 +195,7 @@ A conference is run for it's talks, and here we define how those talks should ap
 
 List all talks
 GET /talk
-> Content-Type: application/json
+> Accept: application/json
 < 200
 < Content-Type: application/json
 {
@@ -237,7 +239,7 @@ GET /talk
 
 List a specific talks
 GET /talk/{id}
-> Content-Type: application/json
+> Accept: application/json
 < 200
 < Content-Type: application/json
 [
@@ -260,6 +262,7 @@ While you can specify the other fields mentioned in the response (like intRoomID
 The fields suffixed "_ro" are server generated.
 POST /talk
 > Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
+> Accept: application/json
 > Content-Type: application/json
 {"strTalkTitle": "Welcome talk", "strTalkDescription": "An introduction to the event", "intSlotID": 1}
 < 200
